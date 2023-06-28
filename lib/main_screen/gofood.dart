@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_final_fields
-
 import 'package:flutter/material.dart';
 import 'package:gojek/data/resto_data.dart';
 import 'package:gojek/model/resto_model.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
+import 'package:gojek/main_screen/menu.dart';
 
 class gofood extends StatefulWidget {
   gofood({Key? key}) : super(key: key);
@@ -24,12 +23,63 @@ class _gofoodState extends State<gofood> {
       setState(() {
         _selectedIndex = index;
       });
-
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    var gridView = GridView.count(
+      shrinkWrap: true,
+      crossAxisCount: 2,
+      physics: const ClampingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      crossAxisSpacing: 30,
+      children: [
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Near.jpg',
+          iconTitle: 'Near Me',
+          routeName: 'menu',
+          onPressed: () {
+            print('Near Me button clicked');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MenuPage()),
+            );
+          },
+        ),
+        
+        
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Yummy.jpg',
+          iconTitle: 'Yummy Dinner', routeName: '', onPressed: () {  },
+        ),
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Promo.jpg',
+          iconTitle: 'Pasti Ada Promo', routeName: '', onPressed: () {  },
+        ),
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Best.jpg',
+          iconTitle: 'Best Sellers', routeName: '', onPressed: () {  },
+        ),
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Bestoran.jpg',
+          iconTitle: 'Bestoran 6.6', routeName: '', onPressed: () {  },
+        ),
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Budget.jpg',
+          iconTitle: 'Budget Meal', routeName: '', onPressed: () {  },
+        ),
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Juara.jpg',
+          iconTitle: 'Juara Lokal Jakarta', routeName: '', onPressed: () {  },
+        ),
+        IconCardWidget(
+          iconAssets: 'assets/images/icon/Healthy.jpg',
+          iconTitle: 'Healthy Food', routeName: '', onPressed: () {  },
+        ),
+      ],
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -59,64 +109,10 @@ class _gofoodState extends State<gofood> {
                     const SizedBox(
                       height: 20,
                     ),
-
-
                     Container(
                       height: 300,
-                      child: 
-                      GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        physics: const ClampingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        crossAxisSpacing: 30,
-                        // mainAxisSpacing: 50,
-                        children: [
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Near.jpg',
-                                  iconTitle: 'Near Me',
-                                ),
-  
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Yummy.jpg',
-                                  iconTitle: 'Yummy Dinner',
-                                ),
-
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Promo.jpg',
-                                  iconTitle: 'Pasti Ada Promo',
-                                ),
-
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Best.jpg',
-                                  iconTitle: 'Best Sellers',
-                                ),
-
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Bestoran.jpg',
-                                  iconTitle: 'Bestoran 6.6',
-                                ),
-  
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Budget.jpg',
-                                  iconTitle: 'Budget Meal',
-                                ),
-
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Juara.jpg',
-                                  iconTitle: 'Juara Lokal Jakarta',
-                                ),
-
-                                const IconCardWidget(
-                                  iconAssets: 'assets/images/icon/Healthy.jpg',
-                                  iconTitle: 'Healthy Food',
-                                ),
-                        ]
-                      ),
+                      child: gridView,
                     ),
-
-
-
                     Container(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,7 +197,7 @@ class _gofoodState extends State<gofood> {
                                 restoName: resto.restoName,
                                 estMin: resto.estMinimum,
                                 estMax: resto.estMaximum,
-                                resto: resto,
+                                resto: resto, 
                               );
                             },
                           )
@@ -259,12 +255,11 @@ class _gofoodState extends State<gofood> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon : new Icon(Icons.close),
+              icon: Icon(Icons.close),
               color: Colors.black45,
-              // size: 25, 
               onPressed: () {
                 Navigator.pop(context);
-                },
+              },
             ),
             const SizedBox(
               width: 15,
