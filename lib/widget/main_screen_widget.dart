@@ -5,6 +5,8 @@ import 'package:gojek/data/banner_data.dart';
 import 'package:gojek/model/banner_model.dart';
 import 'package:gojek/resto_screen/resto_screen.dart';
 
+import '../main_screen/menu.dart';
+
 class RestoCardMarkotop extends StatelessWidget {
   final restoName;
   final rating;
@@ -128,13 +130,16 @@ class IconCardWidget extends StatelessWidget {
   const IconCardWidget({
     Key? key,
     required this.iconAssets,
-    required this.iconTitle,
+    required this.iconTitle, required String routeName, required Null Function() onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () { Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MenuPage()),
+            );},
       child: SizedBox(
         width: 80,
         height: 80,
