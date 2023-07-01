@@ -6,6 +6,7 @@ var restoDataList = [
   RestoModel(
     restoName: 'Bakso Pak Taufiq',
     restoRating: 4.8,
+    restoImage: 'assets/images/kuliner/bakso-mie.jpg',
     restoDistance: 1.5,
     restoJudges: '100+',
     restoLocation: 'Temas Batu',
@@ -55,6 +56,7 @@ var restoDataList = [
   // 2 1
   RestoModel(
     restoName: 'Pos Kopi Kuy!',
+    restoImage: 'assets/images/kuliner/eskopi.jpg',
     restoRating: 4.6,
     restoDistance: 1.2,
     restoJudges: '100+',
@@ -100,14 +102,15 @@ var restoDataList = [
         foodPrice: '18.500',
         isFoodAvailable: true,
       ),
-    ],
-    isRecommended: true,
+    ], isRecommended: true,
+
   ),
   // 3 2
   RestoModel(
     restoName: 'Warung Bu Djito',
     restoRating: 4.8,
     restoDistance: 2.5,
+    restoImage: 'assets/images/kuliner/ayam.jpg',
     restoJudges: '100+',
     restoLocation: 'Pendem, Batu',
     restoEstPrice: '40 rb',
@@ -153,13 +156,14 @@ var restoDataList = [
         isFoodAvailable: true,
       ),
     ],
-    isRecommended: true,
+    isRecommended: true, 
   ),
   // 4 2
   RestoModel(
     restoName: 'Tahu Bakar Mas Pendik',
     restoRating: 4.2,
     restoDistance: 2.1,
+    restoImage: 'assets/images/kuliner/sempol.jpg',
     restoJudges: '100+',
     restoLocation: 'Batu',
     restoEstPrice: '15 rb',
@@ -196,13 +200,14 @@ var restoDataList = [
         isFoodAvailable: false,
       ),
     ],
-    isRecommended: false,
+    isRecommended: false, 
   ),
   // 5 3
   RestoModel(
     restoName: 'KACEF Liddo Plaza',
     restoRating: 4.8,
     restoDistance: 1.8,
+    restoImage: 'assets/images/kuliner/geprek.jpg',
     restoJudges: '100+',
     restoLocation: 'Batu',
     restoEstPrice: '40 rb',
@@ -246,13 +251,14 @@ var restoDataList = [
         isFoodAvailable: true,
       ),
     ],
-    isRecommended: true,
+    isRecommended: true, 
   ),
   // 6 3
   RestoModel(
     restoName: 'Mie Ayam Pak Ngat Lesti',
     restoRating: 4.6,
     restoDistance: 1.9,
+    restoImage: 'assets/images/kuliner/pecel-ayam.jpg',
     restoJudges: '100+',
     restoLocation: 'Batu',
     restoEstPrice: '20 rb',
@@ -296,14 +302,15 @@ var restoDataList = [
         isFoodAvailable: false,
       ),
     ],
-    isRecommended: false,
+    isRecommended: false, 
   ),
   // 7 4
   RestoModel(
-    restoName: 'D\'River Stone Cave',
+    restoName: 'Sweetie',
     restoRating: 4.6,
     restoDistance: 1.3,
     restoJudges: '100+',
+    restoImage: 'assets/images/kuliner/boba.jpg',
     restoLocation: 'Batu',
     restoEstPrice: '25 rb',
     estMinimum: 25,
@@ -339,6 +346,6 @@ var restoDataList = [
         isFoodAvailable: false,
       ),
     ],
-    isRecommended: true,
+    isRecommended: true, 
   ),
 ];
