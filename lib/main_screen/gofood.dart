@@ -3,6 +3,10 @@ import 'package:gojek/data/resto_data.dart';
 import 'package:gojek/model/resto_model.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 import 'package:gojek/main_screen/menu.dart';
+import 'package:gojek/main_screen/pickup.dart';
+import 'package:gojek/main_screen/pencarian.dart';
+
+
 
 class gofood extends StatefulWidget {
   gofood({Key? key}) : super(key: key);
@@ -19,10 +23,13 @@ class _gofoodState extends State<gofood> {
   final String _alamat = "Home";
 
   void _onTappedBottomNav(int index) {
+    List menuBottomNav = [gofood(), PickupPage(), PencarianPage()];
     if (index != _selectedIndex) {
       setState(() {
         _selectedIndex = index;
       });
+
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> menuBottomNav.elementAt(index)));
     }
   }
 
@@ -47,8 +54,6 @@ class _gofoodState extends State<gofood> {
             );
           },
         ),
-        
-        
         IconCardWidget(
           iconAssets: 'assets/images/icon/Yummy.jpg',
           iconTitle: 'Yummy Dinner', routeName: '', onPressed: () {  },
@@ -154,6 +159,7 @@ class _gofoodState extends State<gofood> {
                                   restoName: resto.restoName,
                                   rating: resto.restoRating,
                                   penilai: resto.restoJudges,
+                                  restoImage: resto.restoImage,
                                   resto: resto,
                                 );
                               }).toList(),
@@ -176,31 +182,34 @@ class _gofoodState extends State<gofood> {
                           ),
                           const SizedBox(height: 5),
                           const Text(
-                            'Tasty eats',
+                            'Tasty eat',
                             style: TextStyle(
                               fontSize: 12,
                             ),
                           ),
                           const SizedBox(height: 15),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            padding: EdgeInsets.zero,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: restoDataList.length,
-                            itemBuilder: (context, index) {
-                              final RestoModel resto = restoDataList[index];
-                              return UniversalContent(
-                                jarakResto: resto.restoDistance,
-                                rating: resto.restoRating,
-                                categoryResto: resto.restoCategory.join(", "),
-                                restoPlace: resto.restoLocation,
-                                restoName: resto.restoName,
-                                estMin: resto.estMinimum,
-                                estMax: resto.estMaximum,
-                                resto: resto, 
-                              );
-                            },
-                          )
+                         
+                          // Tampilan Restoran
+                            ListView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: restoDataList.length,
+                              itemBuilder: (context, index) {
+                                final RestoModel resto = restoDataList[index];
+                                return UniversalContent(
+                                  jarakResto: resto.restoDistance,
+                                  rating: resto.restoRating,
+                                  categoryResto: resto.restoCategory.join(", "),
+                                  restoPlace: resto.restoLocation,
+                                  restoName: resto.restoName,
+                                  restoImage: resto.restoImage,
+                                  estMin: resto.estMinimum,
+                                  estMax: resto.estMaximum,
+                                  resto: resto,
+                                );
+                              },
+                            ),
                         ],
                       ),
                     )
@@ -220,6 +229,7 @@ class _gofoodState extends State<gofood> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
             label: 'Pickup',
+
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
@@ -239,71 +249,59 @@ class _gofoodState extends State<gofood> {
         onTap: _onTappedBottomNav,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
+
       ),
     );
   }
 
-  SafeArea buildHeader() {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: _verticalPadding,
-          left: _horizontalPadding,
-          right: _horizontalPadding,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Icon(Icons.close),
-              color: Colors.black45,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    children: [
-                      Text(
-                        'Your location',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                      Icon(
-                        Icons.expand_more,
-                        color: Colors.red,
-                        size: 18,
-                      ),
-                    ],
+  Widget buildHeader() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: _verticalPadding,
+        horizontal: _horizontalPadding,
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.location_pin,
+            color: Colors.green,
+            size: 30,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _alamat,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    _alamat,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Yogyakarta',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 15,
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.notifications_none,
+              color: Colors.grey,
+              size: 30,
             ),
-            const Icon(
-              Icons.favorite_sharp,
-              color: Colors.black45,
-              size: 25,
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
