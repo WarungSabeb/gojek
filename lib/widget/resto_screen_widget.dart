@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:gojek/main_screen/checkout.dart';
 
 class MenuListUnvailable extends StatelessWidget {
   final foodImage;
@@ -13,6 +14,7 @@ class MenuListUnvailable extends StatelessWidget {
     required this.foodName,
     required this.foodDetail,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -244,8 +246,18 @@ class MenuListAvailable extends StatelessWidget {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.of(context).pop();
-
+                   Navigator.of(context).pop();
+                    var _quantity;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CheckoutPage(
+                                          foodName: foodName,
+                                          foodPrice: foodPrice,
+                                          quantity: _quantity,
+                          ),
+                        ),
+                      );
                     
 
                   //   showModalBottomSheet(
@@ -309,29 +321,9 @@ class MenuListAvailable extends StatelessWidget {
                     //   },
                     // );
 
-                    final scaffold = ScaffoldMessenger.of(context);
-                    Navigator.of(context).pop();
-                    scaffold.showSnackBar(
-                      SnackBar(
-                        elevation: 10,
-                        duration: Duration(days: 365),
-                        shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                        content: Text(
-                          '$foodName has been ordered!',
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        action: SnackBarAction(
-                          label: 'Ok',
-                          onPressed: scaffold.hideCurrentSnackBar,
-                          textColor: Colors.white,
-                        ),
-                        backgroundColor: Colors.green.shade700,
-                      ),
-                    );
-
-
+                   
+               
+ // Tutup modal bottom sheet
                   },
 
 
@@ -437,6 +429,65 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         isFavorite ? Icons.favorite : Icons.favorite_border,
         color: Colors.red,
       ),
+    );
+  }
+}
+
+class RestoScreenWidget extends StatefulWidget {
+  @override
+  _RestoScreenWidgetState createState() => _RestoScreenWidgetState();
+}
+
+class _RestoScreenWidgetState extends State<RestoScreenWidget> {
+  int _quantity = 0;
+
+  void _incrementQuantity() {
+    setState(() {
+      _quantity++;
+    });
+  }
+
+  void _decrementQuantity() {
+    setState(() {
+      if (_quantity > 0) {
+        _quantity--;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Column(
+      children: [
+        Text(
+          'Quantity: $_quantity',
+          style: TextStyle(fontSize: 16),
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: _decrementQuantity,
+              icon: Icon(Icons.remove_circle_outline),
+            ),
+            SizedBox(width: 10),
+            Text(
+              '$_quantity',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(width: 10),
+           IconButton(
+  onPressed: _incrementQuantity,
+  icon: Icon(
+    Icons.add_circle_outline,
+    color: Colors.red,
+  ),
+),
+          ],
+        ),
+      ],
     );
   }
 }
