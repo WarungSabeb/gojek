@@ -247,7 +247,7 @@ class MenuListAvailable extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                    Navigator.of(context).pop();
-                    var _quantity;
+                    var _quantity = 1;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
