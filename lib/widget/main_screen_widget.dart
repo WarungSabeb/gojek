@@ -11,6 +11,7 @@ class RestoCardMarkotop extends StatelessWidget {
   final restoName;
   final rating;
   final penilai;
+  final restoImage;
 
   final resto;
 
@@ -19,21 +20,16 @@ class RestoCardMarkotop extends StatelessWidget {
     required this.restoName,
     required this.rating,
     required this.penilai,
+    required this.restoImage,
     required this.resto,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return RestoScreen(data: resto);
-            },
-          ),
-        );
+        
       },
       child: SizedBox(
         height: 170,
@@ -53,24 +49,12 @@ class RestoCardMarkotop extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
-                        'assets/images/resto/default.jpg',
+                        restoImage,
                         height: 100,
-                        width: 190,
+                        width: 180,
                         fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 35),
-                      child: Text(
-                        restoName,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],
@@ -290,6 +274,7 @@ class UniversalContent extends StatelessWidget {
   final jarakResto;
   final rating;
   final categoryResto;
+  final restoImage;
   final restoPlace;
   final restoName;
   final estMin;
@@ -303,6 +288,7 @@ class UniversalContent extends StatelessWidget {
     required this.rating,
     required this.categoryResto,
     required this.restoPlace,
+    required this.restoImage,
     required this.restoName,
     required this.estMin,
     required this.estMax,
@@ -320,6 +306,7 @@ class UniversalContent extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) {
                   return RestoScreen(data: resto);
+
                 },
               ),
             );
@@ -335,25 +322,16 @@ class UniversalContent extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(20),
                         child: Image.asset(
-                          'assets/images/resto/default_cropped.jpg',
-                          height: 100,
+                          restoImage,
+                        height: 120,
+                        width: 180,
+                        fit: BoxFit.fitWidth,
+                    
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          restoName,
-                          maxLines: 2,
-                          overflow: TextOverflow.clip,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
+                     
                     ],
                   ),
                 ),
