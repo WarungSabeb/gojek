@@ -31,10 +31,10 @@ class MenuPage extends StatelessWidget {
               ListTile(
                 leading: Image.asset(
                   'assets/images/banner/1-banner.jpg',
-                  width: 48,
-                  height: 48,
+                  width: 500,
+                  height: 500,
                 ),
-                title: Text('Food Option 1'),
+             
                 onTap: () {
                   // Add your logic here for handling food option 1
                 },
@@ -72,6 +72,7 @@ class MenuPage extends StatelessWidget {
                     categoryResto: resto.restoCategory.join(", "),
                     restoPlace: resto.restoLocation,
                     restoName: resto.restoName,
+                     restoImage: resto.restoImage,
                     estMin: resto.estMinimum,
                     estMax: resto.estMaximum,
                     resto: resto, 
