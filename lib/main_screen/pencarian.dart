@@ -37,6 +37,7 @@ class _PencarianPageState extends State<PencarianPage> {
       children: [
         const Text(
           'Eksplor aneka Kuliner',
+          
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w900,
