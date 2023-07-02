@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gojek/data/resto_data.dart';
+import 'package:gojek/main_screen/Gofood.dart';
+import 'package:gojek/main_screen/address.dart';
+import 'package:gojek/main_screen/checkout.dart';
+import 'package:gojek/main_screen/pencarian.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 import 'package:gojek/main_screen/menu.dart';
 
@@ -18,6 +22,14 @@ class PickupPageState extends State<PickupPage> {
   final String _alamat = "Home";
 
   void _onTappedBottomNav(int index) {
+    // ignore: unused_local_variable
+    List menuBottomNav = [
+      gofood(),
+      PickupPage(),
+      PencarianPage(),
+      CheckoutPage(foodName: '', foodPrice: '', quantity: 1),
+      AddressInputPage(),
+    ];
     if (index != _selectedIndex) {
       setState(() {
         _selectedIndex = index;
@@ -27,28 +39,26 @@ class PickupPageState extends State<PickupPage> {
 
   @override
   Widget build(BuildContext context) {
-    
-
     var gridView = GridView.count(
-      
       shrinkWrap: true,
       crossAxisCount: 2,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      crossAxisSpacing: 30,
-      
+      crossAxisSpacing: 25,
       children: [
-        
-       const Text(
-        'Kategori buat Gofood Pickup',
-           style: TextStyle(
-            fontSize: 15,
-           fontWeight: FontWeight.w900,
-          ),
-          ),
-        const SizedBox(
-           height: 5,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Kategori buat Gofood Pickup',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+              ),
             ),
+            const SizedBox(height: 4),
+          ],
+        ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Near.jpg',
           iconTitle: 'Near Me',
@@ -79,17 +89,20 @@ class PickupPageState extends State<PickupPage> {
           routeName: '',
           onPressed: () {},
         ),
-        
-        const Text(
-        'Kuliner buat GoFood Pickup',
-           style: TextStyle(
-            fontSize: 15,
-           fontWeight: FontWeight.w900,
-          ),
-          ),
-        const SizedBox(
-           height: 5,
+        const SizedBox(height: 20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Kuliner buat GoFood Pickup',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+              ),
             ),
+            const SizedBox(height: 5),
+          ],
+        ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Bestoran.jpg',
           iconTitle: 'Bestoran 6.6',
@@ -117,29 +130,22 @@ class PickupPageState extends State<PickupPage> {
       ],
     );
 
-
-
     const bottomNavigationBarItem = BottomNavigationBarItem(
       icon: Icon(Icons.shopping_bag),
       label: 'Pickup',
     );
+    
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // this for header
           buildHeader(),
-          const SizedBox(
-            height: 10,
-          ),
-          // to call search box
+          const SizedBox(height: 10),
           SearchBox(
             paddingVertical: _verticalPadding,
             paddingHorizontal: _horizontalPadding,
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: _horizontalPadding),
@@ -162,18 +168,14 @@ class PickupPageState extends State<PickupPage> {
                               fontWeight: FontWeight.w900,
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          const SizedBox(height: 5),
                           const Text(
                             'Resto Pickup yang jaga keamanan pesanan.',
                             style: TextStyle(
                               fontSize: 12,
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          const SizedBox(height: 10),
                           Container(
                             height: 170,
                             width: 700,
@@ -191,7 +193,7 @@ class PickupPageState extends State<PickupPage> {
                                 return RestoCardMarkotop(
                                   restoName: resto.restoName,
                                   rating: resto.restoRating,
-                                   restoImage: resto.restoImage,
+                                  restoImage: resto.restoImage,
                                   penilai: resto.restoJudges,
                                   resto: resto,
                                 );
@@ -256,9 +258,7 @@ class PickupPageState extends State<PickupPage> {
                 Navigator.pop(context);
               },
             ),
-            const SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 15),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,18 +285,16 @@ class PickupPageState extends State<PickupPage> {
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-            const SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 15),
             const Icon(
               Icons.favorite_sharp,
               color: Colors.black45,
               size: 25,
-            )
+            ),
           ],
         ),
       ),
