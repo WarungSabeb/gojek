@@ -5,7 +5,7 @@ import 'package:gojek/data/banner_data.dart';
 import 'package:gojek/model/banner_model.dart';
 import 'package:gojek/resto_screen/resto_screen.dart';
 
-import '../main_screen/menu.dart';
+import 'package:gojek/main_screen/menu.dart';
 
 class RestoCardMarkotop extends StatelessWidget {
   final restoName;
@@ -28,7 +28,15 @@ class RestoCardMarkotop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () {Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return RestoScreen(data: resto);
+
+                },
+              ),
+            );
         
       },
       child: SizedBox(
