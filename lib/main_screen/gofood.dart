@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojek/data/resto_data.dart';
+import 'package:gojek/main_screen/address.dart';
+import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/model/resto_model.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 import 'package:gojek/main_screen/menu.dart';
@@ -17,17 +19,18 @@ class gofood extends StatefulWidget {
 
 class _gofoodState extends State<gofood> {
   int _selectedIndex = 0;
-  var _verticalPadding = 10.0;
-  var _horizontalPadding = 10.0;
+   double _verticalPadding = 10.0;
+   double _horizontalPadding = 10.0;
 
   final String _alamat = "Home";
 
   void _onTappedBottomNav(int index) {
-    List menuBottomNav = [gofood(), PickupPage(), PencarianPage()];
+    List menuBottomNav = [gofood(), PickupPage(), PencarianPage(), CheckoutPage(foodName: '', foodPrice: '', quantity: 1), AddressInputPage()];
     if (index != _selectedIndex) {
       setState(() {
         _selectedIndex = index;
       });
+
 
       Navigator.push(context, MaterialPageRoute(builder: (context)=> menuBottomNav.elementAt(index)));
     }
