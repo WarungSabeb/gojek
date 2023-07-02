@@ -16,6 +16,7 @@ class RestoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       body: Column(
         children: [
@@ -113,7 +114,7 @@ class RestoScreen extends StatelessWidget {
                           RestoReviewWidget(
                             keterangan: 'Distance',
                             iconsValue: '${data.restoDistance} km',
-                            iconsColor: Colors.redAccent[700],
+                            iconsColor: Colors.black87,
                             icons: Icons.location_on,
                           ),
                           VerticalDivider(
@@ -125,7 +126,7 @@ class RestoScreen extends StatelessWidget {
                           RestoReviewWidget(
                             keterangan: 'Price',
                             iconsValue: '< ${data.restoEstPrice}',
-                            iconsColor: Colors.redAccent[700],
+                            iconsColor: Colors.orange,
                             icons: Icons.monetization_on,
                           ),
                           VerticalDivider(
@@ -137,7 +138,7 @@ class RestoScreen extends StatelessWidget {
                           RestoReviewWidget(
                             keterangan: 'Great taste',
                             iconsValue: '100+ ratings',
-                            iconsColor: Colors.redAccent[700],
+                            iconsColor: Colors.orange,
                             icons: Icons.thumb_up,
                           ),
                           VerticalDivider(
@@ -148,7 +149,7 @@ class RestoScreen extends StatelessWidget {
                           RestoReviewWidget(
                             keterangan: 'Value for money',
                             iconsValue: '100+ rating',
-                            iconsColor: Colors.redAccent[700],
+                            iconsColor: Colors.orange,
                             icons: Icons.rice_bowl_rounded,
                           ),
                         ],
