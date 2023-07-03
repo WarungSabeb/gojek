@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gojek/data/resto_data.dart';
 import 'package:gojek/main_screen/address.dart';
 import 'package:gojek/main_screen/checkout.dart';
+import 'package:gojek/main_screen/history.dart';
 import 'package:gojek/model/resto_model.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 import 'package:gojek/main_screen/menu.dart';
@@ -25,7 +26,7 @@ class _gofoodState extends State<gofood> {
   final String _alamat = "Home";
 
   void _onTappedBottomNav(int index) {
-    List menuBottomNav = [gofood(), PickupPage(), PencarianPage(), CheckoutPage(foodName: '', foodPrice: '', quantity: 1), AddressInputPage()];
+    List menuBottomNav = [gofood(), PickupPage(), PencarianPage(), CheckoutPage(foodName: 'food', foodPrice: '15000', quantity: 1), HistoryPage(),];
     if (index != _selectedIndex) {
       setState(() {
         _selectedIndex = index;
@@ -247,7 +248,7 @@ class _gofoodState extends State<gofood> {
             label: 'History',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: 0,
         selectedItemColor: Colors.green,
         onTap: _onTappedBottomNav,
         type: BottomNavigationBarType.fixed,

@@ -3,6 +3,7 @@ import 'package:gojek/data/resto_data.dart';
 import 'package:gojek/main_screen/Gofood.dart';
 import 'package:gojek/main_screen/address.dart';
 import 'package:gojek/main_screen/checkout.dart';
+import 'package:gojek/main_screen/history.dart';
 import 'package:gojek/main_screen/pencarian.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 import 'package:gojek/main_screen/menu.dart';
@@ -15,7 +16,7 @@ class PickupPage extends StatefulWidget {
 }
 
 class PickupPageState extends State<PickupPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   var _verticalPadding = 10.0;
   var _horizontalPadding = 10.0;
 
@@ -27,13 +28,15 @@ class PickupPageState extends State<PickupPage> {
       gofood(),
       PickupPage(),
       PencarianPage(),
-      CheckoutPage(foodName: '', foodPrice: '', quantity: 1),
-      AddressInputPage(),
+      CheckoutPage(foodName: 'food', foodPrice: '15000', quantity: 1),
+      HistoryPage(),
     ];
     if (index != _selectedIndex) {
       setState(() {
         _selectedIndex = index;
       });
+
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> menuBottomNav.elementAt(index)));
     }
   }
 
@@ -41,92 +44,143 @@ class PickupPageState extends State<PickupPage> {
   Widget build(BuildContext context) {
     var gridView = GridView.count(
       shrinkWrap: true,
-      crossAxisCount: 2,
+      crossAxisCount: 1,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       crossAxisSpacing: 25,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Kategori buat Gofood Pickup',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            const SizedBox(height: 4),
-          ],
-        ),
-        IconCardWidget(
+
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Near.jpg',
           iconTitle: 'Near Me',
           routeName: 'menu',
           onPressed: () {
-            print('Near Me button clicked');
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MenuPage()),
-            );
-          },
+            // print('Near Me button clicked');
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => MenuPage()),
+            // );
+          }, 
         ),
-        IconCardWidget(
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Yummy.jpg',
           iconTitle: 'Yummy Dinner',
           routeName: '',
           onPressed: () {},
         ),
-        IconCardWidget(
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Promo.jpg',
           iconTitle: 'Pasti Ada Promo',
           routeName: '',
           onPressed: () {},
         ),
-        IconCardWidget(
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Best.jpg',
           iconTitle: 'Best Sellers',
           routeName: '',
           onPressed: () {},
         ),
-        const SizedBox(height: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Kuliner buat GoFood Pickup',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            const SizedBox(height: 5),
-          ],
-        ),
-        IconCardWidget(
+
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Bestoran.jpg',
           iconTitle: 'Bestoran 6.6',
           routeName: '',
           onPressed: () {},
         ),
-        IconCardWidget(
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Budget.jpg',
           iconTitle: 'Budget Meal',
           routeName: '',
           onPressed: () {},
         ),
-        IconCardWidget(
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Juara.jpg',
-          iconTitle: 'Juara Lokal Jakarta',
+          iconTitle: 'Juara Lokal\n   Jakarta',
           routeName: '',
           onPressed: () {},
         ),
-        IconCardWidget(
+        PickupCardWidget(
           iconAssets: 'assets/images/icon/Healthy.jpg',
           iconTitle: 'Healthy Food',
           routeName: '',
           onPressed: () {},
         ),
+      ],
+    );
+
+    var gridView2 = GridView.count(
+      shrinkWrap: true,
+      crossAxisCount: 1,
+      physics: const ClampingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      crossAxisSpacing: 25,
+      children: [
+
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Beverages.jpg',
+          iconTitle: 'Beverages',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Snacks.jpg',
+          iconTitle: 'Snacks',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Sweets.jpg',
+          iconTitle: 'Sweets',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Rice.jpg',
+          iconTitle: 'Rice',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Chicken.jpg',
+          iconTitle: 'Chicken & duck',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Fast.jpg',
+          iconTitle: 'Fast food',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Bakery.jpg',
+          iconTitle: 'Bakery',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Japanese.jpg',
+          iconTitle: 'Japanese',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        CuisinesCardWidget(
+          iconAssets: 'assets/images/icon/Bakso.jpg',
+          iconTitle: 'Bakso & soto',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+
+
       ],
     );
 
@@ -140,11 +194,6 @@ class PickupPageState extends State<PickupPage> {
       body: Column(
         children: [
           buildHeader(),
-          const SizedBox(height: 10),
-          SearchBox(
-            paddingVertical: _verticalPadding,
-            paddingHorizontal: _horizontalPadding,
-          ),
           const SizedBox(height: 30),
           Expanded(
             child: Padding(
@@ -153,16 +202,36 @@ class PickupPageState extends State<PickupPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const Text(
+                            'Categories for GoFood Pickup',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                    SizedBox(height: 10,),
                     Container(
-                      height: 300,
+                      height: 140,
                       child: gridView,
+                    ),
+                    const Text(
+                            'Cuisines for GoFood Pickup',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                    SizedBox(height: 10,),
+                    Container(
+                      height: 140,
+                      child: gridView2,
                     ),
                     Container(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'Prosedur Kesehatan Ketat',
+                            'Strict safety measures',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w900,
@@ -170,7 +239,7 @@ class PickupPageState extends State<PickupPage> {
                           ),
                           const SizedBox(height: 5),
                           const Text(
-                            'Resto Pickup yang jaga keamanan pesanan.',
+                            'Pickup restos prioritizing order safety.',
                             style: TextStyle(
                               fontSize: 12,
                             ),
@@ -231,7 +300,7 @@ class PickupPageState extends State<PickupPage> {
             label: 'History',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: 1,
         selectedItemColor: Colors.green,
         onTap: _onTappedBottomNav,
         type: BottomNavigationBarType.fixed,
@@ -251,13 +320,7 @@ class PickupPageState extends State<PickupPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: Icon(Icons.close),
-              color: Colors.black45,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+
             const SizedBox(width: 15),
             Expanded(
               child: Column(
@@ -290,11 +353,7 @@ class PickupPageState extends State<PickupPage> {
               ),
             ),
             const SizedBox(width: 15),
-            const Icon(
-              Icons.favorite_sharp,
-              color: Colors.black45,
-              size: 25,
-            ),
+
           ],
         ),
       ),

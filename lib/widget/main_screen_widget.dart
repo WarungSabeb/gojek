@@ -182,6 +182,209 @@ class IconCardWidget extends StatelessWidget {
   }
 }
 
+class PickupCardWidget extends StatelessWidget {
+  final iconAssets;
+  final iconTitle;
+
+  const PickupCardWidget({
+    Key? key,
+    required this.iconAssets,
+    required this.iconTitle, 
+    required String routeName, 
+    required Null Function() onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () { 
+        // Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => MenuPage()),
+        //     );
+            },
+      child: SizedBox(
+        width: 80,
+        height: 80,
+        child: Column(
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(180),
+                side: BorderSide(color: Color.fromARGB(255, 218, 218, 218) )
+              ),
+              
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 70,
+                  width: 70,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        iconAssets,
+                        height: 50,
+                        alignment: Alignment.center,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 5,
+              ),
+              child: Text(
+                iconTitle,
+                style: const TextStyle(
+                  color: Color.fromRGBO(69, 69, 69, 1),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CuisinesCardWidget extends StatelessWidget {
+  final iconAssets;
+  final iconTitle;
+
+  const CuisinesCardWidget({
+    Key? key,
+    required this.iconAssets,
+    required this.iconTitle, 
+    required String routeName, 
+    required Null Function() onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () { 
+            },
+      child: SizedBox(
+        width: 80,
+        height: 80,
+        child: Column(
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(180),
+                side: BorderSide(color: Color.fromARGB(255, 218, 218, 218) )
+              ),
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage(iconAssets),
+                      )
+
+                    ],
+                  ),
+
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 5,
+              ),
+              child: Text(
+                iconTitle,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(69, 69, 69, 1),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SearchCardWidget extends StatelessWidget {
+  final iconAssets;
+  final iconTitle;
+
+  const SearchCardWidget({
+    Key? key,
+    required this.iconAssets,
+    required this.iconTitle, 
+    required String routeName, 
+    required Null Function() onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+
+      width: 10,
+      child: InkWell(
+      onTap: () { 
+        // Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => MenuPage()),
+        //     );
+            },
+      child: SizedBox(
+        // width: 70,
+        // height: 70,
+        child: Column(
+          children: [
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(color: Color.fromARGB(255, 218, 218, 218) )
+              ),
+              
+              // child: Padding(
+              //   padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15), // Image border
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(48), // Image radius
+                    child: Image.asset(iconAssets, fit: BoxFit.cover),
+                  ),
+                )
+              // ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 5,
+              ),
+              child: Text(
+                iconTitle,
+                style: const TextStyle(
+                  color: Color.fromRGBO(69, 69, 69, 1),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
+    );
+  }
+}
+
 class BannerWidget extends StatelessWidget {
   const BannerWidget({
     Key? key,

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:gojek/data/resto_data.dart';
+import 'package:gojek/main_screen/Gofood.dart';
+import 'package:gojek/main_screen/address.dart';
+import 'package:gojek/main_screen/checkout.dart';
+import 'package:gojek/main_screen/history.dart';
+import 'package:gojek/main_screen/pickup.dart';
 import 'package:gojek/main_screen/menu.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 
@@ -12,11 +17,19 @@ class PencarianPage extends StatefulWidget {
 }
 
 class _PencarianPageState extends State<PencarianPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   var _verticalPadding = 10.0;
   var _horizontalPadding = 10.0;
 
   final String _alamat = "Home";
+
+      List menuBottomNav = [
+      gofood(),
+      PickupPage(),
+      PencarianPage(),
+      CheckoutPage(foodName: 'food', foodPrice: '15000', quantity: 1),
+      HistoryPage(),
+    ];
 
   void _onTappedBottomNav(int index) {
     if (index != _selectedIndex) {
@@ -24,107 +37,166 @@ class _PencarianPageState extends State<PencarianPage> {
         _selectedIndex = index;
       });
     }
+
+  Navigator.push(context, MaterialPageRoute(builder: (context)=> menuBottomNav.elementAt(index)));
   }
 
   @override
   Widget build(BuildContext context) {
     var gridView = GridView.count(
       shrinkWrap: true,
-      crossAxisCount: 2,
+      crossAxisCount: 7,
       physics: const ClampingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      crossAxisSpacing: 30,
+
+      crossAxisSpacing: 40,
       children: [
-        const Text(
-          'Eksplor aneka Kuliner',
-          
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Near.jpg',
-          iconTitle: 'Near Me',
-          routeName: 'menu',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Beverages.jpg',
+          iconTitle: 'Beverages',
+          routeName: '',
           onPressed: () {
-            print('Near Me button clicked');
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MenuPage()),
-            );
-          },
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Yummy.jpg',
-          iconTitle: 'Yummy Dinner',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Snacks.jpg',
+          iconTitle: 'Snacks',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Promo.jpg',
-          iconTitle: 'Pasti Ada Promo',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Sweets.jpg',
+          iconTitle: 'Sweets',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Best.jpg',
-          iconTitle: 'Best Sellers',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Rice.jpg',
+          iconTitle: 'Rice',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        
-       
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Bestoran.jpg',
-          iconTitle: 'Bestoran 6.6',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Chicken.jpg',
+          iconTitle: 'Chicken & duck',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Budget.jpg',
-          iconTitle: 'Budget Meal',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Fast.jpg',
+          iconTitle: 'Fast food',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Juara.jpg',
-          iconTitle: 'Juara Lokal Jakarta',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Bakery.jpg',
+          iconTitle: 'Bakery',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Healthy.jpg',
-          iconTitle: 'Healthy Food',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Japanese.jpg',
+          iconTitle: 'Japanese',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Bestoran.jpg',
-          iconTitle: 'Bestoran 6.6',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Bakso.jpg',
+          iconTitle: 'Bakso & soto',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Budget.jpg',
-          iconTitle: 'Budget Meal',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Noodles.jpg',
+          iconTitle: 'Noodles',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Juara.jpg',
-          iconTitle: 'Juara Lokal Jakarta',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Korean.jpg',
+          iconTitle: 'Korean',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
         ),
-        IconCardWidget(
-          iconAssets: 'assets/images/icon/Healthy.jpg',
-          iconTitle: 'Healthy Food',
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Coffee.jpg',
+          iconTitle: 'Coffee',
           routeName: '',
-          onPressed: () {},
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Martabak.jpg',
+          iconTitle: 'Martabak',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Pizza.jpg',
+          iconTitle: 'Pizza & pasta',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Chinese.jpg',
+          iconTitle: 'Chinese',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Sate.jpg',
+          iconTitle: 'Sate',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Western.jpg',
+          iconTitle: 'Western',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Seafood.jpg',
+          iconTitle: 'Seafood',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Middle.jpg',
+          iconTitle: 'Middle Eastern',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Thai.jpg',
+          iconTitle: 'Thai',
+          routeName: '',
+          onPressed: () {
+          }, 
+        ),
+        SearchCardWidget(
+          iconAssets: 'assets/images/icon/Indian.jpg',
+          iconTitle: 'Indian',
+          routeName: '',
+          onPressed: () {
+          }, 
         ),
       ],
     );
@@ -148,7 +220,7 @@ class _PencarianPageState extends State<PencarianPage> {
             paddingHorizontal: _horizontalPadding,
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
           Expanded(
             child: Padding(
@@ -157,20 +229,81 @@ class _PencarianPageState extends State<PencarianPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    // Divider(color: Colors.black,),
+                    const SizedBox(height: 15),
+                    Text("Restos you've searched", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    // const SizedBox(height: 5),
+                    // Text('Sponsored', style: TextStyle(fontSize: 16,),),
+                    const SizedBox(height: 15),
+
+                          Container(
+                            height: 170,
+                            width: 700,
+                            child: GridView.count(
+                              scrollDirection: Axis.horizontal,
+                              crossAxisCount: 1,
+                              crossAxisSpacing:
+                                  MediaQuery.of(context).size.width * 0.01,
+                              mainAxisSpacing:
+                                  MediaQuery.of(context).size.width * 0.01,
+                              children: restoDataList
+                                  .where((rec) => rec.isRecommended)
+                                  .toList()
+                                  .map((resto) {
+                                return RestoCardMarkotop(
+                                  restoName: resto.restoName,
+                                  rating: resto.restoRating,
+                                  restoImage: resto.restoImage,
+                                  penilai: resto.restoJudges,
+                                  resto: resto,
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                    const SizedBox(height: 20),
+                    Divider(color: Colors.black,),
+
+
+
+                    const SizedBox(height: 20),
+                    Text('Top-rated by other foodies', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 5),
+                    Text('Sponsored', style: TextStyle(fontSize: 15,),),
+                    const SizedBox(height: 15),
+
+                          Container(
+                            height: 170,
+                            width: 700,
+                            child: GridView.count(
+                              scrollDirection: Axis.horizontal,
+                              crossAxisCount: 1,
+                              crossAxisSpacing:
+                                  MediaQuery.of(context).size.width * 0.01,
+                              mainAxisSpacing:
+                                  MediaQuery.of(context).size.width * 0.01,
+                              children: restoDataList
+                                  .where((rec) => rec.isRecommended)
+                                  .toList()
+                                  .map((resto) {
+                                return RestoCardMarkotop(
+                                  restoName: resto.restoName,
+                                  rating: resto.restoRating,
+                                  restoImage: resto.restoImage,
+                                  penilai: resto.restoJudges,
+                                  resto: resto,
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                    const SizedBox(height: 20),
+                    Divider(color: Colors.black,),
+                    const SizedBox(height: 20),
+                    Text('Explore by cuisine', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 15),
                     Container(
-                      height: 300,
+                      height: 1170,
                       child: gridView,
                     ),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                         
-                         
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15),
                   ],
                 ),
               ),
@@ -198,7 +331,7 @@ class _PencarianPageState extends State<PencarianPage> {
             label: 'History',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: 2,
         selectedItemColor: Colors.green,
         onTap: _onTappedBottomNav,
         type: BottomNavigationBarType.fixed,
@@ -218,54 +351,28 @@ class _PencarianPageState extends State<PencarianPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: Icon(Icons.close),
-              color: Colors.black45,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+
             const SizedBox(
               width: 15,
+              height: 45,
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
-                    children: [
-                      Text(
-                        'Your location',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                      Icon(
-                        Icons.expand_more,
-                        color: Colors.red,
-                        size: 18,
-                      ),
-                    ],
-                  ),
+
                   Text(
-                    _alamat,
+                    'Search',
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
                     ),
                   )
                 ],
               ),
             ),
-            const SizedBox(
-              width: 15,
-            ),
-            const Icon(
-              Icons.favorite_sharp,
-              color: Colors.black45,
-              size: 25,
-            )
+
           ],
         ),
       ),
