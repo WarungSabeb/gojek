@@ -90,6 +90,7 @@ class MenuListAvailable extends StatefulWidget {
   final String foodName;
   final String foodDetail;
   final String foodPrice;
+  final String restoName;
 
   MenuListAvailable({
     Key? key,
@@ -97,6 +98,7 @@ class MenuListAvailable extends StatefulWidget {
     required this.foodName,
     required this.foodDetail,
     required this.foodPrice,
+    required this.restoName,
   }) : super(key: key);
 
   @override
@@ -239,6 +241,8 @@ void _decrementQuantity() {
                                 foodName: widget.foodName,
                                 foodPrice: widget.foodPrice,
                                 quantity: _quantity,
+                                restoName: widget.restoName,
+                                foodImage: widget.foodImage,
                               ),
                             ),
                           );

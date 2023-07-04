@@ -177,6 +177,7 @@ class RestoScreen extends StatelessWidget {
                                 foodName: menu.foodMenu,
                                 foodDetail: menu.foodDescription,
                                 foodPrice: menu.foodPrice,
+                                restoName: data.restoName,
                               )
                             : MenuListUnvailable(
                                 foodImage: menu.foodImage,
