@@ -6,6 +6,7 @@ import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/main_screen/pencarian.dart';
 import 'package:gojek/main_screen/pickup.dart';
 import 'package:gojek/main_screen/menu.dart';
+import 'package:gojek/main_screen/promos.dart';
 import 'package:gojek/theme.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 
@@ -28,7 +29,7 @@ class _HistoryPageState extends State<HistoryPage> {
       gofood(),
       PickupPage(),
       PencarianPage(),
-      CheckoutPage(foodName: 'food', foodPrice: '15000', quantity: 1),
+      PromosPage(),
       HistoryPage(),
     ];
 
@@ -197,13 +198,13 @@ class _HistoryPageState extends State<HistoryPage> {
                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.grey)
+                                      side: BorderSide(color: Color.fromARGB(255, 60, 140, 63))
                                     )
                                   )
                                 ),
                                 child: Container(
                                   margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),),
+                                  child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 60, 140, 63)),),
                                 )
                                 ),
                             ],
@@ -344,13 +345,13 @@ class _HistoryPageState extends State<HistoryPage> {
                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.grey)
+                                      side: BorderSide(color: Color.fromARGB(255, 60, 140, 63))
                                     )
                                   )
                                 ),
                                 child: Container(
                                   margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),),
+                                  child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 60, 140, 63)),),
                                 )
                                 ),
                             ],

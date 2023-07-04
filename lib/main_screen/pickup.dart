@@ -5,6 +5,7 @@ import 'package:gojek/main_screen/address.dart';
 import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/main_screen/history.dart';
 import 'package:gojek/main_screen/pencarian.dart';
+import 'package:gojek/main_screen/promos.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 import 'package:gojek/main_screen/menu.dart';
 
@@ -28,7 +29,7 @@ class PickupPageState extends State<PickupPage> {
       gofood(),
       PickupPage(),
       PencarianPage(),
-      CheckoutPage(foodName: 'food', foodPrice: '15000', quantity: 1),
+      PromosPage(),
       HistoryPage(),
     ];
     if (index != _selectedIndex) {

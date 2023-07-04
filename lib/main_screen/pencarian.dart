@@ -6,6 +6,7 @@ import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/main_screen/history.dart';
 import 'package:gojek/main_screen/pickup.dart';
 import 'package:gojek/main_screen/menu.dart';
+import 'package:gojek/main_screen/promos.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 
 
@@ -27,7 +28,7 @@ class _PencarianPageState extends State<PencarianPage> {
       gofood(),
       PickupPage(),
       PencarianPage(),
-      CheckoutPage(foodName: 'food', foodPrice: '15000', quantity: 1),
+      PromosPage(),
       HistoryPage(),
     ];
 
