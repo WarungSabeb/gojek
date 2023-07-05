@@ -89,7 +89,7 @@ class MenuListAvailable extends StatefulWidget {
   final String foodImage;
   final String foodName;
   final String foodDetail;
-  final String foodPrice;
+  final int foodPrice;
   final String restoName;
 
   MenuListAvailable({
@@ -108,12 +108,12 @@ class MenuListAvailable extends StatefulWidget {
 class _MenuListAvailableState extends State<MenuListAvailable> {
   int _quantity = 0;
   // ignore: unused_field
-  double _totalPrice = 0.0;
+  int _totalPrice = 0;
 
 void _incrementQuantity() {
   setState(() {
     _quantity++;
-    _totalPrice = double.parse(widget.foodPrice) * _quantity;
+    _totalPrice = widget.foodPrice * _quantity;
   });
 }
 
@@ -121,7 +121,7 @@ void _decrementQuantity() {
   setState(() {
     if (_quantity > 0) {
       _quantity--;
-      _totalPrice = double.parse(widget.foodPrice) * _quantity;
+      _totalPrice = widget.foodPrice * _quantity;
     }
   });
 }
@@ -221,7 +221,7 @@ void _decrementQuantity() {
                     ),
 
                     Text(
-                      'Rp. ${widget.foodPrice}',
+                      'Rp. ${oCcy.format(widget.foodPrice)}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -318,7 +318,7 @@ void _decrementQuantity() {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Rp. ${widget.foodPrice}',
+                        'Rp. ${oCcy.format(widget.foodPrice)}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,

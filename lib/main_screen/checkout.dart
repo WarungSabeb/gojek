@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final oCcy = NumberFormat("#,##0", "en_US");
 
 class CheckoutPage extends StatefulWidget {
   final String foodName;
-  final String foodPrice;
+  final int foodPrice;
   int quantity;
   final String restoName;
   final String foodImage;
@@ -20,7 +23,9 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
-  double totalPrice = 0.0;
+  int totalPrice = 0;
+  int dfee = 10000;
+  int sfee = 5000;
   TextEditingController noteController = TextEditingController();
   String paymentMethod = 'Cash';
 
@@ -31,7 +36,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   void calculateTotalPrice() {
-    double price = double.parse(widget.foodPrice);
+    int price = widget.foodPrice;
     totalPrice = price * widget.quantity;
   }
 
@@ -249,7 +254,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             children: [
                               Text(widget.foodName, style: TextStyle(fontWeight: FontWeight.bold),),
                               SizedBox(height: 10,),
-                              Text(widget.foodPrice),
+                              Text('Rp ${oCcy.format(widget.foodPrice)}'),
+                              
                               SizedBox(height: 40,),
                               TextButton(
                               onPressed: () {}, 
@@ -390,7 +396,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Price' , style: TextStyle(fontSize: 15)),
-                            Text(widget.foodPrice, style: TextStyle(fontSize: 15))
+                            Text('${oCcy.format(totalPrice)}', style: TextStyle(fontSize: 15))
                           ],
                         ),
 
@@ -400,7 +406,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Delivery fee', style: TextStyle(fontSize: 15)),
-                            Text('10.000', style: TextStyle(fontSize: 15))
+                            Text('${oCcy.format(dfee)}', style: TextStyle(fontSize: 15))
                           ],
                         ),
 
@@ -410,7 +416,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Service and other fees', style: TextStyle(fontSize: 15)),
-                            Text('5.000', style: TextStyle(fontSize: 15))
+                            Text('${oCcy.format(sfee)}', style: TextStyle(fontSize: 15))
                           ],
                         ),
 
@@ -424,7 +430,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Total payment', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                            Text('45.000', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
+                            Text('${oCcy.format(totalPrice + dfee + sfee)}', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
                           ],
                         ),
 
@@ -472,7 +478,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Cash'),
-                          Text('45.000', style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text('${oCcy.format(totalPrice + dfee + sfee)}', style: TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )
                         ],
