@@ -105,6 +105,101 @@ void _decrementQuantity() {
     );
   }
 
+  Widget cartOrder(String name, int price, String image, int quantity) {
+    return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(name, style: TextStyle(fontWeight: FontWeight.bold),),
+                              SizedBox(height: 10,),
+                              Text('Rp ${oCcy.format(price)}'),
+                              
+                              SizedBox(height: 40,),
+                              TextButton(
+                              onPressed: () {}, 
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.grey)
+                                  )
+                                )
+                              ),
+                              child: Container(
+                                margin: EdgeInsets.only(left: 0, right: 5),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.description, color: Colors.black, size: 18,),
+                                    Text('  Notes', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
+                                  ],
+                                )
+                                )
+                              ),
+
+                            ],
+                          ),
+
+                          Container(
+                            width: 150,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Container(
+                                  height: 80,
+                                  width: 80,
+                                  child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.asset(
+                                    image,
+                                    fit: BoxFit.cover,
+                                  ),
+
+                                ),
+                                ),
+                                SizedBox(height: 5,),
+
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 30,
+                                      child: IconButton(
+                                        splashRadius: 30,
+                                        // color: Colors.red,
+                                        onPressed: _decrementQuantity,
+                                        icon: Icon(Icons.remove_circle_outline),
+                                      ),
+                                    ),
+                                    SizedBox(width: 15,),
+                                    Text(
+                                      quantity.toString(),
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    SizedBox(width: 5,),
+                                    Container(
+                                      width: 30,
+                                      child: IconButton(
+                                        splashRadius: 30,
+                                      onPressed: _incrementQuantity,
+                                      icon: Icon(
+                                        Icons.add_circle_outline,
+                                        // color: Colors.red,
+                                      ),
+                                    ),
+                                    )
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          )
+                        ],
+                      );
+    }
+
   @override
   Widget build(BuildContext context) {
     
@@ -261,101 +356,11 @@ void _decrementQuantity() {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(height: 10,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(widget.foodName, style: TextStyle(fontWeight: FontWeight.bold),),
-                              SizedBox(height: 10,),
-                              Text('Rp ${oCcy.format(widget.foodPrice)}'),
-                              
-                              SizedBox(height: 40,),
-                              TextButton(
-                              onPressed: () {}, 
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(color: Colors.grey)
-                                  )
-                                )
-                              ),
-                              child: Container(
-                                margin: EdgeInsets.only(left: 0, right: 5),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.description, color: Colors.black, size: 18,),
-                                    Text('  Notes', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
-                                  ],
-                                )
-                                )
-                              ),
-
-                            ],
-                          ),
-
-                          Container(
-                            width: 150,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                  height: 80,
-                                  width: 80,
-                                  child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image.asset(
-                                    widget.foodImage,
-                                    fit: BoxFit.cover,
-                                  ),
-
-                                ),
-                                ),
-                                SizedBox(height: 5,),
-
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 30,
-                                      child: IconButton(
-                                        splashRadius: 30,
-                                        // color: Colors.red,
-                                        onPressed: _decrementQuantity,
-                                        icon: Icon(Icons.remove_circle_outline),
-                                      ),
-                                    ),
-                                    SizedBox(width: 15,),
-                                    Text(
-                                      widget.quantity.toString(),
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(width: 5,),
-                                    Container(
-                                      width: 30,
-                                      child: IconButton(
-                                        splashRadius: 30,
-                                      onPressed: _incrementQuantity,
-                                      icon: Icon(
-                                        Icons.add_circle_outline,
-                                        // color: Colors.red,
-                                      ),
-                                    ),
-                                    )
-                                  ],
-                                ),
-
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                      cartOrder(widget.foodName, widget.foodPrice, widget.foodImage, widget.quantity),
                       Divider(color: Colors.black, thickness: 0,),
                       SizedBox(height: 5,),
-
+                      
+                      
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
