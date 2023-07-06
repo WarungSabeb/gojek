@@ -43,6 +43,139 @@ class _HistoryPageState extends State<HistoryPage> {
   Navigator.push(context, MaterialPageRoute(builder: (context)=> menuBottomNav.elementAt(index)));
   }
 
+  Widget historyTile(String resto, int price, String image, String date, String desc, int item) {
+    return Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 15,),
+                              Container(
+                                height: 80,
+                                child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: SizedBox.fromSize(
+                                  size: Size.fromRadius(48),
+                                  child: Image.asset(image, fit: BoxFit.cover),
+                                ),
+                              ),
+                              ),
+                              SizedBox(width: 15,),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 230,
+                                        child: Text(resto,
+                                          style: TextStyle(
+                                            fontSize: 18, 
+                                            fontWeight: FontWeight.bold, 
+                                            overflow: TextOverflow.ellipsis), 
+                                        ),
+                                      ),
+                                      CircleAvatar(
+                                        radius: 10,
+                                        backgroundColor: red,
+                                        child: Icon(Icons.thumb_up, color: Colors.white,size: 16,),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(height: 5,),
+
+                                  Row(
+                                    children: [
+                                      Text(date, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),),
+                                      SizedBox(width: 10,),
+                                      Icon(Icons.circle, size: 3,color: Colors.grey,),
+                                      SizedBox(width: 10,),
+                                      Text('Completed', style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 60, 140, 63), fontWeight: FontWeight.bold),),
+                                    ],
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Container(
+                                    height: 50,
+                                    width: 235,
+                                    child: Text(desc,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        overflow: TextOverflow.ellipsis
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          Divider(color: Colors.black, indent: 15, endIndent: 15,),
+                          SizedBox(height: 5,),
+
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 15),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(price.toString(),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16
+                                      ),
+                                    ),
+                                    SizedBox(height: 5,),
+                                    Row(
+                                      children: [
+                                        Text('$item item',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      // color: Colors.grey,
+                                      fontSize: 12
+                                      ),
+                                    ),
+                                    SizedBox(width: 5,),
+                                    Icon(Icons.circle, size: 3,color: Colors.grey,),
+                                      ],
+                                    )
+                                  ],
+                                ),
+
+                                TextButton(
+                                  onPressed: () {}, 
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(18.0),
+                                        side: BorderSide(color: Color.fromARGB(255, 60, 140, 63))
+                                      )
+                                    )
+                                  ),
+                                  child: Container(
+                                    margin: EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 60, 140, 63)),),
+                                  )
+                                  ),
+                              ],
+                            ),
+                          ),
+                          
+                          SizedBox(height: 10,)
+                        ],
+                      ),
+                    );
+    }
+
   @override
   Widget build(BuildContext context) {
 
@@ -70,297 +203,13 @@ class _HistoryPageState extends State<HistoryPage> {
                   children: [
                     // SizedBox(height: 100,),
 
-                    Container(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 15,),
-                              Container(
-                                height: 80,
-                                child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: SizedBox.fromSize(
-                                  size: Size.fromRadius(48),
-                                  child: Image.asset('assets/images/kuliner/ayam.jpg', fit: BoxFit.cover),
-                                ),
-                              ),
-                              ),
-                              SizedBox(width: 15,),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 230,
-                                        child: Text('Warung Bu Djito',
-                                          style: TextStyle(
-                                            fontSize: 18, 
-                                            fontWeight: FontWeight.bold, 
-                                            overflow: TextOverflow.ellipsis), 
-                                        ),
-                                      ),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: red,
-                                        child: Icon(Icons.thumb_up, color: Colors.white,size: 16,),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(height: 5,),
-
-                                  Row(
-                                    children: [
-                                      Text('14 Jan 2023, 17:20', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),),
-                                      SizedBox(width: 10,),
-                                      Icon(Icons.circle, size: 3,color: Colors.grey,),
-                                      SizedBox(width: 10,),
-                                      Text('Completed', style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 60, 140, 63), fontWeight: FontWeight.bold),),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Container(
-                                    height: 50,
-                                    width: 235,
-                                    child: Text('1 Sate Ayam, 1 Nasi Kuning Komplit, 1 Ayam Geprek Bu Djito, 1 Lalapan Bu Djito (Ayam)',
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        overflow: TextOverflow.ellipsis
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                          Divider(color: Colors.black, indent: 15, endIndent: 15,),
-                          SizedBox(height: 5,),
-
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 15,),
-
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('97.500',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16
-                                    ),
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Row(
-                                    children: [
-                                      Text('4 item',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    // color: Colors.grey,
-                                    fontSize: 12
-                                    ),
-                                  ),
-                                  SizedBox(width: 5,),
-                                  Icon(Icons.circle, size: 3,color: Colors.grey,),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              SizedBox(width: 5,),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                                // width: 75,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 178, 255, 200),
-                                  borderRadius: BorderRadius.circular(15)
-                                ),
-                                child: Text('Saved 86k',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 60, 140, 63), 
-                                  fontWeight: FontWeight.bold,
-
-                                ),),
-                              ),
-
-                              SizedBox(width: 135,),
-
-                              TextButton(
-                                onPressed: () {}, 
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Color.fromARGB(255, 60, 140, 63))
-                                    )
-                                  )
-                                ),
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 60, 140, 63)),),
-                                )
-                                ),
-                            ],
-                          ),
-                          
-                          SizedBox(height: 10,)
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(height: 10,),
-
-                    Container(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 15,),
-                              Container(
-                                height: 80,
-                                child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: SizedBox.fromSize(
-                                  size: Size.fromRadius(48),
-                                  child: Image.asset('assets/images/kuliner/ayam.jpg', fit: BoxFit.cover),
-                                ),
-                              ),
-                              ),
-                              SizedBox(width: 15,),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 230,
-                                        child: Text('Warung Bu Djito',
-                                          style: TextStyle(
-                                            fontSize: 18, 
-                                            fontWeight: FontWeight.bold, 
-                                            overflow: TextOverflow.ellipsis), 
-                                        ),
-                                      ),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: red,
-                                        child: Icon(Icons.thumb_up, color: Colors.white,size: 16,),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(height: 5,),
-
-                                  Row(
-                                    children: [
-                                      Text('12 Jan 2023, 14:17', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),),
-                                      SizedBox(width: 10,),
-                                      Icon(Icons.circle, size: 3,color: Colors.grey,),
-                                      SizedBox(width: 10,),
-                                      Text('Completed', style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 60, 140, 63), fontWeight: FontWeight.bold),),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10,),
-                                  Container(
-                                    height: 50,
-                                    width: 235,
-                                    child: Text('1 Sate Ayam, 1 Nasi Kuning Komplit, 1 Ayam Geprek Bu Djito, 1 Lalapan Bu Djito (Ayam)',
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        overflow: TextOverflow.ellipsis
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                          Divider(color: Colors.black, indent: 15, endIndent: 15,),
-                          SizedBox(height: 5,),
-
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(width: 15,),
-
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('97.500',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16
-                                    ),
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Row(
-                                    children: [
-                                      Text('4 item',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    // color: Colors.grey,
-                                    fontSize: 12
-                                    ),
-                                  ),
-                                  SizedBox(width: 5,),
-                                  Icon(Icons.circle, size: 3,color: Colors.grey,),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              SizedBox(width: 5,),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                                // width: 75,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 178, 255, 200),
-                                  borderRadius: BorderRadius.circular(15)
-                                ),
-                                child: Text('Saved 86k',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 60, 140, 63), 
-                                  fontWeight: FontWeight.bold,
-
-                                ),),
-                              ),
-
-                              SizedBox(width: 135,),
-
-                              TextButton(
-                                onPressed: () {}, 
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Color.fromARGB(255, 60, 140, 63))
-                                    )
-                                  )
-                                ),
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 60, 140, 63)),),
-                                )
-                                ),
-                            ],
-                          ),
-                          
-                          SizedBox(height: 10,)
-                        ],
-                      ),
-                    ),
+                    historyTile(
+                      'Warung Bu Djito', 
+                      97500, 
+                      'assets/images/kuliner/ayam.jpg', 
+                      '12 Jan 2023, 14:17', 
+                      '1 Sate Ayam, 1 Nasi Kuning Komplit, 1 Ayam Geprek Bu Djito, 1 Lalapan Bu Djito (Ayam)', 
+                      4)
 
                     
                     
