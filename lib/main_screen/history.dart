@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gojek/data/resto_data.dart';
 import 'package:gojek/main_screen/Gofood.dart';
-import 'package:gojek/main_screen/address.dart';
-import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/main_screen/pencarian.dart';
 import 'package:gojek/main_screen/pickup.dart';
-import 'package:gojek/main_screen/menu.dart';
 import 'package:gojek/main_screen/promos.dart';
 import 'package:gojek/theme.dart';
-import 'package:gojek/widget/main_screen_widget.dart';
+import 'package:gojek/database/database.dart';
+import 'package:intl/intl.dart';
 
+final oCcy = NumberFormat("#,##0", "en_US");
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -22,8 +20,12 @@ class _HistoryPageState extends State<HistoryPage> {
   int _selectedIndex = 4;
   var _verticalPadding = 10.0;
   var _horizontalPadding = 10.0;
+  final AppDb database = AppDb();
+  DateTime now = DateTime.now();
+  List<OrderData> orders = [];
 
-  final String _alamat = "Home";
+  
+  
 
       List menuBottomNav = [
       gofood(),
@@ -43,7 +45,9 @@ class _HistoryPageState extends State<HistoryPage> {
   Navigator.push(context, MaterialPageRoute(builder: (context)=> menuBottomNav.elementAt(index)));
   }
 
-  Widget historyTile(String resto, int price, String image, String date, String desc, int item) {
+    Widget historyTile(int index) {
+    final order = orders[index];
+    String convertedDateTime = "${order.orderTime.year.toString()}-${order.orderTime.month.toString().padLeft(2,'0')}-${order.orderTime.day.toString().padLeft(2,'0')} ${order.orderTime.hour.toString().padLeft(2,'0')}:${order.orderTime.minute.toString().padLeft(2,'0')}";
     return Container(
                       color: Colors.white,
                       child: Column(
@@ -60,7 +64,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                 borderRadius: BorderRadius.circular(15),
                                 child: SizedBox.fromSize(
                                   size: Size.fromRadius(48),
-                                  child: Image.asset(image, fit: BoxFit.cover),
+                                  child: Image.asset(order.restaurantIMG, fit: BoxFit.cover),
                                 ),
                               ),
                               ),
@@ -73,7 +77,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                     children: [
                                       Container(
                                         width: 230,
-                                        child: Text(resto,
+                                        child: Text(order.restaurant,
                                           style: TextStyle(
                                             fontSize: 18, 
                                             fontWeight: FontWeight.bold, 
@@ -91,7 +95,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
                                   Row(
                                     children: [
-                                      Text(date, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),),
+                                      Text(convertedDateTime.toString(), style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),),
                                       SizedBox(width: 10,),
                                       Icon(Icons.circle, size: 3,color: Colors.grey,),
                                       SizedBox(width: 10,),
@@ -102,7 +106,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                   Container(
                                     height: 50,
                                     width: 235,
-                                    child: Text(desc,
+                                    child: Text(order.orderedItem,
                                       maxLines: 2,
                                       style: TextStyle(
                                         fontSize: 14,
@@ -128,26 +132,26 @@ class _HistoryPageState extends State<HistoryPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(price.toString(),
+                                    Text('${oCcy.format(order.price)}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16
                                       ),
                                     ),
                                     SizedBox(height: 5,),
-                                    Row(
-                                      children: [
-                                        Text('$item item',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      // color: Colors.grey,
-                                      fontSize: 12
-                                      ),
-                                    ),
-                                    SizedBox(width: 5,),
-                                    Icon(Icons.circle, size: 3,color: Colors.grey,),
-                                      ],
-                                    )
+                                    // Row(
+                                    //   children: [
+                                    //     Text(order.quantity.toString() + ' item',
+                                    // style: TextStyle(
+                                    //   fontWeight: FontWeight.bold,
+                                    //   // color: Colors.grey,
+                                    //   fontSize: 12
+                                    //   ),
+                                    // ),
+                                    // SizedBox(width: 5,),
+                                    // Icon(Icons.circle, size: 3,color: Colors.grey,),
+                                    //   ],
+                                    // )
                                   ],
                                 ),
 
@@ -176,8 +180,148 @@ class _HistoryPageState extends State<HistoryPage> {
                     );
     }
 
+  // Widget historyTile(String resto, int price, String image, String item, int quantity, DateTime date) {
+  //   String convertedDateTime = "${date.year.toString()}-${date.month.toString().padLeft(2,'0')}-${date.day.toString().padLeft(2,'0')} ${date.hour.toString().padLeft(2,'0')}:${date.minute.toString().padLeft(2,'0')}";
+  //   return Container(
+  //                     color: Colors.white,
+  //                     child: Column(
+  //                       children: [
+  //                         SizedBox(height: 20,),
+  //                         Row(
+  //                           mainAxisAlignment: MainAxisAlignment.start,
+  //                           crossAxisAlignment: CrossAxisAlignment.start,
+  //                           children: [
+  //                             SizedBox(width: 15,),
+  //                             Container(
+  //                               height: 80,
+  //                               child: ClipRRect(
+  //                               borderRadius: BorderRadius.circular(15),
+  //                               child: SizedBox.fromSize(
+  //                                 size: Size.fromRadius(48),
+  //                                 child: Image.asset(image, fit: BoxFit.cover),
+  //                               ),
+  //                             ),
+  //                             ),
+  //                             SizedBox(width: 15,),
+  //                             Column(
+  //                               mainAxisAlignment: MainAxisAlignment.start,
+  //                               crossAxisAlignment: CrossAxisAlignment.start,
+  //                               children: [
+  //                                 Row(
+  //                                   children: [
+  //                                     Container(
+  //                                       width: 230,
+  //                                       child: Text(resto,
+  //                                         style: TextStyle(
+  //                                           fontSize: 18, 
+  //                                           fontWeight: FontWeight.bold, 
+  //                                           overflow: TextOverflow.ellipsis), 
+  //                                       ),
+  //                                     ),
+  //                                     CircleAvatar(
+  //                                       radius: 10,
+  //                                       backgroundColor: red,
+  //                                       child: Icon(Icons.thumb_up, color: Colors.white,size: 16,),
+  //                                     )
+  //                                   ],
+  //                                 ),
+  //                                 SizedBox(height: 5,),
+
+  //                                 Row(
+  //                                   children: [
+  //                                     Text(convertedDateTime.toString(), style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),),
+  //                                     SizedBox(width: 10,),
+  //                                     Icon(Icons.circle, size: 3,color: Colors.grey,),
+  //                                     SizedBox(width: 10,),
+  //                                     Text('Completed', style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 60, 140, 63), fontWeight: FontWeight.bold),),
+  //                                   ],
+  //                                 ),
+  //                                 SizedBox(height: 10,),
+  //                                 Container(
+  //                                   height: 50,
+  //                                   width: 235,
+  //                                   child: Text(item,
+  //                                     maxLines: 2,
+  //                                     style: TextStyle(
+  //                                       fontSize: 14,
+  //                                       overflow: TextOverflow.ellipsis
+  //                                     ),
+  //                                   ),
+  //                                 )
+  //                               ],
+  //                             )
+  //                           ],
+  //                         ),
+  //                         Divider(color: Colors.black, indent: 15, endIndent: 15,),
+  //                         SizedBox(height: 5,),
+
+  //                         Container(
+  //                           margin: EdgeInsets.symmetric(horizontal: 15),
+  //                           child: Row(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                             children: [
+
+  //                               Column(
+  //                                 mainAxisAlignment: MainAxisAlignment.start,
+  //                                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                                 children: [
+  //                                   Text(price.toString(),
+  //                                   style: TextStyle(
+  //                                     fontWeight: FontWeight.bold,
+  //                                     fontSize: 16
+  //                                     ),
+  //                                   ),
+  //                                   SizedBox(height: 5,),
+  //                                   Row(
+  //                                     children: [
+  //                                       Text('$quantity item',
+  //                                   style: TextStyle(
+  //                                     fontWeight: FontWeight.bold,
+  //                                     // color: Colors.grey,
+  //                                     fontSize: 12
+  //                                     ),
+  //                                   ),
+  //                                   SizedBox(width: 5,),
+  //                                   Icon(Icons.circle, size: 3,color: Colors.grey,),
+  //                                     ],
+  //                                   )
+  //                                 ],
+  //                               ),
+
+  //                               TextButton(
+  //                                 onPressed: () {}, 
+  //                                 style: ButtonStyle(
+  //                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+  //                                     RoundedRectangleBorder(
+  //                                       borderRadius: BorderRadius.circular(18.0),
+  //                                       side: BorderSide(color: Color.fromARGB(255, 60, 140, 63))
+  //                                     )
+  //                                   )
+  //                                 ),
+  //                                 child: Container(
+  //                                   margin: EdgeInsets.symmetric(horizontal: 10),
+  //                                   child: Text('Reorder', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 60, 140, 63)),),
+  //                                 )
+  //                                 ),
+  //                             ],
+  //                           ),
+  //                         ),
+                          
+  //                         SizedBox(height: 10,)
+  //                       ],
+  //                     ),
+  //                   );
+  //   }
+
   @override
   Widget build(BuildContext context) {
+
+    database.getAllOrders().then((fetchedOrders) {
+      setState(() {
+        orders = fetchedOrders;
+      });
+    });
 
     const bottomNavigationBarItem = BottomNavigationBarItem(
       icon: Icon(Icons.shopping_bag),
@@ -203,17 +347,30 @@ class _HistoryPageState extends State<HistoryPage> {
                   children: [
                     // SizedBox(height: 100,),
 
-                    historyTile(
-                      'Warung Bu Djito', 
-                      97500, 
-                      'assets/images/kuliner/ayam.jpg', 
-                      '12 Jan 2023, 14:17', 
-                      '1 Sate Ayam, 1 Nasi Kuning Komplit, 1 Ayam Geprek Bu Djito, 1 Lalapan Bu Djito (Ayam)', 
-                      4)
+                    // historyTile(
+                    //   'Warung Bu Djito', 
+                    //   97500, 
+                    //   'assets/images/kuliner/ayam.jpg',
+                    //   '1 Sate Ayam, 1 Nasi Kuning Komplit, 1 Ayam Geprek Bu Djito, 1 Lalapan Bu Djito (Ayam)', 
+                    //   4,
+                    //   now
+                    // ),
 
-                    
-                    
+                    Container(
+                      height:MediaQuery.of(context).size.height - 180,
+                      child: ListView.builder(
+                      itemCount: orders.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            historyTile(index),
+                            SizedBox(height: 20,)
 
+                          ],
+                        );
+                      },
+                    ),
+                    )
                   ],
 
             ),

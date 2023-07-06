@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gojek/data/resto_data.dart';
-import 'package:gojek/main_screen/address.dart';
-import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/main_screen/history.dart';
 import 'package:gojek/main_screen/promos.dart';
 import 'package:gojek/model/resto_model.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
-import 'package:gojek/main_screen/menu.dart';
 import 'package:gojek/main_screen/pickup.dart';
 import 'package:gojek/main_screen/pencarian.dart';
 
@@ -51,41 +48,34 @@ class _gofoodState extends State<gofood> {
           iconAssets: 'assets/images/icon/Near.jpg',
           iconTitle: 'Near Me',
           routeName: 'menu',
-          onPressed: () {
-            print('Near Me button clicked');
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MenuPage()),
-            );
-          },
         ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Yummy.jpg',
-          iconTitle: 'Yummy Dinner', routeName: '', onPressed: () {  },
+          iconTitle: 'Yummy Dinner', routeName: '',
         ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Promo.jpg',
-          iconTitle: 'Pasti Ada Promo', routeName: '', onPressed: () {  },
+          iconTitle: 'Pasti Ada Promo', routeName: '',
         ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Best.jpg',
-          iconTitle: 'Best Sellers', routeName: '', onPressed: () {  },
+          iconTitle: 'Best Sellers', routeName: '',
         ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Bestoran.jpg',
-          iconTitle: 'Bestoran 6.6', routeName: '', onPressed: () {  },
+          iconTitle: 'Bestoran 6.6', routeName: '',
         ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Budget.jpg',
-          iconTitle: 'Budget Meal', routeName: '', onPressed: () {  },
+          iconTitle: 'Budget Meal', routeName: '',
         ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Juara.jpg',
-          iconTitle: 'Juara Lokal Jakarta', routeName: '', onPressed: () {  },
+          iconTitle: 'Juara Lokal Jakarta', routeName: '',
         ),
         IconCardWidget(
           iconAssets: 'assets/images/icon/Healthy.jpg',
-          iconTitle: 'Healthy Food', routeName: '', onPressed: () {  },
+          iconTitle: 'Healthy Food', routeName: '',
         ),
       ],
     );

@@ -91,6 +91,7 @@ class MenuListAvailable extends StatefulWidget {
   final String foodDetail;
   final int foodPrice;
   final String restoName;
+  final String restoImage;
 
   MenuListAvailable({
     Key? key,
@@ -99,6 +100,7 @@ class MenuListAvailable extends StatefulWidget {
     required this.foodDetail,
     required this.foodPrice,
     required this.restoName,
+    required this.restoImage,
   }) : super(key: key);
 
   @override
@@ -211,7 +213,7 @@ void _decrementQuantity() {
                     ),
 
                     Text(
-                      'Total Harga: Rp. $_totalPrice',
+                      'Total Harga: Rp. ${oCcy.format(_totalPrice)}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -243,6 +245,7 @@ void _decrementQuantity() {
                                 quantity: _quantity,
                                 restoName: widget.restoName,
                                 foodImage: widget.foodImage,
+                                restoImage: widget.restoImage,
                               ),
                             ),
                           );

@@ -122,16 +122,14 @@ class IconCardWidget extends StatelessWidget {
   const IconCardWidget({
     Key? key,
     required this.iconAssets,
-    required this.iconTitle, required String routeName, required Null Function() onPressed,
+    required this.iconTitle, required String routeName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () { Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MenuPage()),
-            );},
+      onTap: () { 
+            },
       child: SizedBox(
         width: 80,
         height: 80,

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gojek/data/resto_data.dart';
 import 'package:gojek/main_screen/Gofood.dart';
-import 'package:gojek/main_screen/address.dart';
-import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/main_screen/history.dart';
 import 'package:gojek/main_screen/pencarian.dart';
 import 'package:gojek/main_screen/pickup.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
-import 'package:gojek/main_screen/menu.dart';
 
 class PromosPage extends StatefulWidget {
   PromosPage({Key? key}) : super(key: key);

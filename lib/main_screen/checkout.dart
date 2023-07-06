@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gojek/main_screen/history.dart';
 import 'package:intl/intl.dart';
+import 'package:gojek/database/database.dart';
 
 final oCcy = NumberFormat("#,##0", "en_US");
 
@@ -9,6 +11,7 @@ class CheckoutPage extends StatefulWidget {
   int quantity;
   final String restoName;
   final String foodImage;
+  final String restoImage;
 
   CheckoutPage({
     required this.foodName,
@@ -16,6 +19,7 @@ class CheckoutPage extends StatefulWidget {
     required this.quantity, 
     required this.restoName, 
     required this.foodImage, 
+    required this.restoImage,
   });
 
   @override
@@ -24,10 +28,31 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   int totalPrice = 0;
+  int finalPrice = 0;
   int dfee = 10000;
   int sfee = 5000;
   TextEditingController noteController = TextEditingController();
   String paymentMethod = 'Cash';
+  final AppDb database = AppDb();
+  DateTime now = DateTime.now();
+
+    Future insert(
+      String resto, int price, String image, String desc, int item) async {
+    final row = await database.into(database.order).insertReturning(
+        OrderCompanion.insert(
+          deliveryAddress: 'Home', 
+          driverID: 1, 
+          orderedItem: widget.foodName, 
+          price: finalPrice, 
+          restaurant: widget.restoName, 
+          restaurantAddress: widget.restoName, 
+          restaurantID: 1, 
+          restaurantIMG: widget.restoImage, 
+          userID: 1, 
+          orderTime: now,
+          )
+        );
+  }
 
   @override
   void initState() {
@@ -38,12 +63,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
   void calculateTotalPrice() {
     int price = widget.foodPrice;
     totalPrice = price * widget.quantity;
+    finalPrice = widget.foodPrice * widget.quantity + sfee + dfee;
   }
 
   void _incrementQuantity() {
   setState(() {
     widget.quantity++;
     totalPrice = widget.foodPrice * widget.quantity;
+    finalPrice = widget.foodPrice * widget.quantity + sfee + dfee;
   });
 }
 
@@ -52,6 +79,7 @@ void _decrementQuantity() {
     if (widget.quantity > 0) {
       widget.quantity--;
       totalPrice = widget.foodPrice * widget.quantity;
+      finalPrice = widget.foodPrice * widget.quantity + sfee + dfee;
     }
   });
 }
@@ -119,6 +147,7 @@ void _decrementQuantity() {
                               
                               SizedBox(height: 40,),
                               TextButton(
+                              // onPressed: () {database.deleteAllOrders();}, 
                               onPressed: () {}, 
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -451,7 +480,7 @@ void _decrementQuantity() {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Total payment', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                            Text('${oCcy.format(totalPrice + dfee + sfee)}', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
+                            Text('${oCcy.format(finalPrice)}', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
                           ],
                         ),
 
@@ -499,7 +528,7 @@ void _decrementQuantity() {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Cash'),
-                          Text('${oCcy.format(totalPrice + dfee + sfee)}', style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text('${oCcy.format(finalPrice)}', style: TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )
                         ],
@@ -518,7 +547,10 @@ void _decrementQuantity() {
                     ],
                   ),
                   TextButton(
-                              onPressed: () {}, 
+                              onPressed: () {
+                                insert(widget.restoName, finalPrice, widget.restoImage, widget.foodName, widget.quantity);
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> HistoryPage()));
+                                }, 
                               style: ButtonStyle(
                                 backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 60, 140, 63)),
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

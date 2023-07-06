@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gojek/data/resto_data.dart';
 import 'package:gojek/main_screen/Gofood.dart';
-import 'package:gojek/main_screen/address.dart';
-import 'package:gojek/main_screen/checkout.dart';
 import 'package:gojek/main_screen/history.dart';
 import 'package:gojek/main_screen/pickup.dart';
-import 'package:gojek/main_screen/menu.dart';
 import 'package:gojek/main_screen/promos.dart';
 import 'package:gojek/widget/main_screen_widget.dart';
 
@@ -21,8 +18,6 @@ class _PencarianPageState extends State<PencarianPage> {
   int _selectedIndex = 2;
   var _verticalPadding = 10.0;
   var _horizontalPadding = 10.0;
-
-  final String _alamat = "Home";
 
       List menuBottomNav = [
       gofood(),
