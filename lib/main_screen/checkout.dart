@@ -40,6 +40,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
     totalPrice = price * widget.quantity;
   }
 
+  void _incrementQuantity() {
+  setState(() {
+    widget.quantity++;
+    totalPrice = widget.foodPrice * widget.quantity;
+  });
+}
+
+void _decrementQuantity() {
+  setState(() {
+    if (widget.quantity > 0) {
+      widget.quantity--;
+      totalPrice = widget.foodPrice * widget.quantity;
+    }
+  });
+}
+
   void showPaymentDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -91,7 +107,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    int quantity = widget.quantity;
+    
     return Scaffold(
       // backgroundColor: Colors.grey,
       appBar: AppBar(
@@ -308,13 +324,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       child: IconButton(
                                         splashRadius: 30,
                                         // color: Colors.red,
-                                        onPressed: () {quantity -= 1;},
+                                        onPressed: _decrementQuantity,
                                         icon: Icon(Icons.remove_circle_outline),
                                       ),
                                     ),
                                     SizedBox(width: 15,),
                                     Text(
-                                      '$quantity',
+                                      widget.quantity.toString(),
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     SizedBox(width: 5,),
@@ -322,7 +338,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       width: 30,
                                       child: IconButton(
                                         splashRadius: 30,
-                                      onPressed: () {quantity += 1;},
+                                      onPressed: _incrementQuantity,
                                       icon: Icon(
                                         Icons.add_circle_outline,
                                         // color: Colors.red,
@@ -524,75 +540,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
           )
         ],
       )
-
-
-
-
-
-      // body: Padding(
-      //   padding: EdgeInsets.all(16.0),
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.stretch,
-      //     children: [
-      //       Text(
-      //         'Order Summary',
-      //         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      //       ),
-      //       SizedBox(height: 16.0),
-      //       ListTile(
-      //         leading: Icon(Icons.shopping_cart),
-      //         title: Text(widget.foodName),
-      //         subtitle: Text('Price: Rp. ${widget.foodPrice}'),
-      //         trailing: Text('Qty: ${widget.quantity}'),
-      //       ),
-      //       SizedBox(height: 16.0),
-      //       TextField(
-      //         controller: noteController,
-      //         decoration: InputDecoration(
-      //           labelText: 'Note',
-      //           border: OutlineInputBorder(),
-      //         ),
-      //       ),
-
-      //       Divider(),
-      //       Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //         children: [
-      //           Text(
-      //             'Total:',
-      //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      //           ),
-      //           Text(
-      //             'Rp. $totalPrice',
-      //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      //           ),
-      //         ],
-      //       ),
-            
-      //       SizedBox(height: 16.0),
-      //       ElevatedButton(
-      //         onPressed: () {
-      //           showPaymentDialog(context);
-      //         },
-      //         child: Text('Select Payment Method'),
-      //       ),
-      //       SizedBox(height: 16.0),
-      //       Text(
-      //         'Payment Method: $paymentMethod',
-      //         style: TextStyle(fontSize: 14),
-      //       ),
-      //       SizedBox(height: 16.0),
-      //       ElevatedButton(
-      //         onPressed: () {
-      //           // ignore: unused_local_variable
-      //           String note = noteController.text;
-      //           // Logic for placing the order with the selected payment method and note
-      //         },
-      //         child: Text('Place Order'),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
