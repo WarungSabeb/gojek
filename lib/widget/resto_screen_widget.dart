@@ -193,7 +193,12 @@ void _decrementQuantity() {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: _decrementQuantity,
+                          onPressed: () {setState(() {
+                            if (_quantity > 0) {
+                              _quantity--;
+                              _totalPrice = widget.foodPrice * _quantity;
+                            }
+                          });},
                           icon: Icon(Icons.remove_circle_outline),
                         ),
                         SizedBox(width: 10),
@@ -203,7 +208,10 @@ void _decrementQuantity() {
                         ),
                         SizedBox(width: 10),
                         IconButton(
-                          onPressed: _incrementQuantity,
+                          onPressed: () {setState(() {
+                            _quantity++;
+                            _totalPrice = widget.foodPrice * _quantity;
+                          });},
                           icon: Icon(
                             Icons.add_circle_outline,
                             color: Colors.red,
